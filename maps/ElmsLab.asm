@@ -132,16 +132,15 @@ ElmCheckTogepiEgg:
 	checkevent EVENT_TOGEPI_HATCHED
 	iftrue ElmEggHatchedScript
 ElmCheckGotEggAgain:
-	checkevent EVENT_GOT_TOGEPI_EGG_FROM_ELMS_AIDE ; why are we checking it again?
-	iftrue ElmWaitingEggHatchScript
 	checkevent EVENT_GOT_EXP_SHARE_FROM_ELM
-	iftrue .GotExpShareFromElm
+	iftrue .AfterExpShareCheck
 	checkevent EVENT_GAVE_MYSTERY_EGG_TO_ELM
-	iffalse .NoExpShareYet
+	iffalse .AfterExpShareCheck
 	checkflag ENGINE_ZEPHYRBADGE
 	iftrue ElmGiveExpShareScript
-.NoExpShareYet:
-.GotExpShareFromElm:
+.AfterExpShareCheck:
+	checkevent EVENT_GOT_TOGEPI_EGG_FROM_ELMS_AIDE ; why are we checking it again?
+	iftrue ElmWaitingEggHatchScript
 	checkflag ENGINE_ZEPHYRBADGE
 	iftrue ElmAideHasEggScript
 	checkevent EVENT_GAVE_MYSTERY_EGG_TO_ELM
@@ -371,8 +370,11 @@ ElmGiveExpShareScript:
 	setevent EVENT_GOT_EXP_SHARE_FROM_ELM
 	writetext ElmGiveExpShareText2
 	promptbutton
+	checkevent EVENT_GOT_TOGEPI_EGG_FROM_ELMS_AIDE
+	iftrue .Done
 	writetext ElmAideHasEggText
 	waitbutton
+.Done:
 	closetext
 	end
 
