@@ -137,11 +137,11 @@ ItemDescriptions:
 	dw PassDesc
 	dw TeruSama9Desc
 	dw TeruSama10Desc
-	dw TeruSama11Desc
+	dw ZincDesc
 	dw CharcoalDesc
 	dw BerryJuiceDesc
 	dw ScopeLensDesc
-	dw TeruSama12Desc
+	dw MachoBraceDesc
 	dw TeruSama13Desc
 	dw MetalCoatDesc
 	dw DragonFangDesc
@@ -378,7 +378,11 @@ LuckyPunchDesc:
 	next "ratio of CHANSEY.@"
 
 CalciumDesc:
-	db   "Ups SPECIAL stats"
+	db   "Raises SPCL.ATK"
+	next "of one #MON.@"
+
+ZincDesc:
+	db   "Raises SPCL.DEF"
 	next "of one #MON.@"
 
 RareCandyDesc:
@@ -789,6 +793,10 @@ TeruSama10Desc:
 
 TeruSama11Desc:
 	db   "?@"
+
+MachoBraceDesc:
+	db   "Doubles EV gain,"
+	next "lowers SPEED. (HOLD)@"
 
 CharcoalDesc:
 	db   "Powers up fire-"
