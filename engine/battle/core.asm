@@ -5623,7 +5623,7 @@ MoveInfoBox:
 
 	ld h, b
 	ld l, c
-	ld [hl], "/"
+	ld [hl], '/'
 
 	ld a, [wPlayerMoveStruct + MOVE_ANIM]
 	ld b, a
