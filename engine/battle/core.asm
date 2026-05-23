@@ -2151,11 +2151,20 @@ UpdateBattleStateAndExperienceAfterEnemyFaint:
 	ld a, [wBattleResult]
 	and BATTLERESULT_BITMASK
 	ld [wBattleResult], a ; WIN
-	call IsAnyMonHoldingExpShare
-	jr z, .skip_exp
-	ld hl, wEnemyMonBaseStats
-	ld b, wEnemyMonEnd - wEnemyMonBaseStats
-.loop
+	; fallthrough
+
+ApplyBattleExperience:
+	; Preserve bits of non-fainted participants
+	ld a, [wBattleParticipantsNotFainted]
+	ld d, a
+	push de
+	call GiveExperiencePoints
+	pop de
+	; If Exp. Share is ON, give 50% EXP to non-participants
+	ld a, [wExpShareToggle]
+	and a
+	ret z
+	ld hl, wEnemyMonBaseExp
 	srl [hl]
 	inc hl
 	dec b

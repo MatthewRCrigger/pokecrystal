@@ -134,6 +134,14 @@ ElmCheckTogepiEgg:
 ElmCheckGotEggAgain:
 	checkevent EVENT_GOT_TOGEPI_EGG_FROM_ELMS_AIDE ; why are we checking it again?
 	iftrue ElmWaitingEggHatchScript
+	checkevent EVENT_GOT_EXP_SHARE_FROM_ELM
+	iftrue .GotExpShareFromElm
+	checkevent EVENT_GAVE_MYSTERY_EGG_TO_ELM
+	iffalse .NoExpShareYet
+	checkflag ENGINE_ZEPHYRBADGE
+	iftrue ElmGiveExpShareScript
+.NoExpShareYet:
+.GotExpShareFromElm:
 	checkflag ENGINE_ZEPHYRBADGE
 	iftrue ElmAideHasEggScript
 	checkevent EVENT_GAVE_MYSTERY_EGG_TO_ELM
@@ -352,6 +360,23 @@ ElmAfterTheftScript:
 ElmStudyingEggScript:
 	writetext ElmStudyingEggText
 	waitbutton
+	closetext
+	end
+
+ElmGiveExpShareScript:
+	writetext ElmGiveExpShareText1
+	promptbutton
+	verbosegiveitem EXP_SHARE
+	iffalse ElmScript_NoRoomForExpShare
+	setevent EVENT_GOT_EXP_SHARE_FROM_ELM
+	writetext ElmGiveExpShareText2
+	promptbutton
+	writetext ElmAideHasEggText
+	waitbutton
+	closetext
+	end
+
+ElmScript_NoRoomForExpShare:
 	closetext
 	end
 
@@ -1041,6 +1066,25 @@ ElmStudyingEggText:
 
 	para "I learn anything"
 	line "about that EGG!"
+	done
+
+ElmGiveExpShareText1:
+	text "ELM: <PLAY_G>! You"
+	line "earned the ZEPHYR"
+	cont "BADGE? Excellent!"
+
+	para "PROF.OAK sent this"
+	line "EXP.SHARE for you."
+
+	para "Turn it on to let"
+	line "benched #MON gain"
+	cont "battle EXP."
+	done
+
+ElmGiveExpShareText2:
+	text "ELM: Keep it with"
+	line "you on your"
+	cont "journey!"
 	done
 
 ElmAideHasEggText:
