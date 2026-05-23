@@ -1078,9 +1078,9 @@ ElmGiveExpShareText1:
 	para "PROF.OAK sent this"
 	line "EXP.SHARE for you."
 
-	para "Turn it on to let"
-	line "benched #MON gain"
-	cont "battle EXP."
+	para "Turn it on to share"
+	line "battle EXP with your"
+	cont "whole party."
 	done
 
 ElmGiveExpShareText2:
