@@ -69,15 +69,12 @@ MrPokemonsHouse_MrPokemonScript:
 	writetext MrPokemonText_GimmeTheScale
 	yesorno
 	iffalse .refused
-	verbosegiveitem EXP_SHARE
-	iffalse .full
 	takeitem RED_SCALE
 	sjump .AlwaysNewDiscoveries
 
 .refused
 	writetext MrPokemonText_Disappointed
 	waitbutton
-.full
 	closetext
 	end
 
@@ -331,15 +328,12 @@ MrPokemonText_GimmeTheScale:
 	line "What's that?"
 	cont "A red GYARADOS?"
 
-	para "That's rare! "
-	line "I, I want it…"
+	para "That's rare!"
+	line "May I keep it for"
+	cont "my research?"
 
-	para "<PLAY_G>, would you"
-	line "care to trade it?"
-
-	para "I can offer this"
-	line "EXP.SHARE I got"
-	cont "from PROF.OAK."
+	para "I'll study what"
+	line "made it turn red."
 	done
 
 MrPokemonText_Disappointed:

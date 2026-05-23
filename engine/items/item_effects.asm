@@ -515,7 +515,7 @@ PokeBallEffect:
 	ld a, [wCurPartyLevel]
 	ld h, a
 	push hl
-	farcall ApplyExperienceAfterEnemyCaught
+	farcall ApplyBattleExperience
 	pop hl
 	ld a, l
 	ld [wCurPartySpecies], a
