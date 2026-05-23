@@ -1128,6 +1128,11 @@ _PlayersPCNoItemsText::
 	text "No items here!"
 	prompt
 
+_CantDepositText::
+	text "Can't deposit"
+	line "this item."
+	prompt
+
 _PlayersPCHowManyDepositText::
 	text "How many do you"
 	line "want to deposit?"
